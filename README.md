@@ -70,7 +70,7 @@ Your server should be now running on http://localhost:8090
 ## Get an access token with Postman
 
 1. Install Postman (https://www.getpostman.com)
-2. Import Postman collection from the `project.postman_collection.json` file
+2. Import Postman collection from the `Dockerized_SpringBoot_PostgreSQL.postman_collection.json` file
 3. Enjoy !!
 
 ## Built With
