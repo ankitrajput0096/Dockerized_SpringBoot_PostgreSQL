@@ -44,6 +44,12 @@ Once you have maven and docker installed on your environment, install the projec
 mvn install
 ```
 
+Build docker Image:
+
+```
+docker-compose build
+```
+
 Start docker:
 
 ```
