@@ -73,7 +73,7 @@ Keep docker running in a separate terminal tab, create another tab to run the ap
 
 Your server should be now running on http://localhost:8090
 
-## Get an access token with Postman
+## Get an access to all exposed API's with Postman
 
 1. Install Postman (https://www.getpostman.com)
 2. Import Postman collection from the `Dockerized_SpringBoot_PostgreSQL.postman_collection.json` file
