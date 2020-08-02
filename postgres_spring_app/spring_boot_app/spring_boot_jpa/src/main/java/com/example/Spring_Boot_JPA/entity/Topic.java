@@ -1,15 +1,17 @@
-package com.example.Spring_Boot_JPA.model;
+package com.example.Spring_Boot_JPA.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Topic")
 public class Topic {
 	
 	@Id
+	@NotNull
 	@Column(name="topic_id")
 	private String id;
 	
@@ -52,6 +54,4 @@ public class Topic {
 	{
 		return "[id :"+id+", name :"+name+", description :"+description+"]";
 	}
-	
-	
 }
