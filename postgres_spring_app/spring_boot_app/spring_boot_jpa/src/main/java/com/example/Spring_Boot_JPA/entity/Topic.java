@@ -24,7 +24,10 @@ public class Topic {
 	public Topic() {
 	}
 
-	public Topic(String id, String name, String description) {
+	public Topic(
+			String id,
+			String name,
+			String description) {
 		super();
 		this.id = id;
 		this.name = name;

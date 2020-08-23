@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PersistentDataManagerTopic implements DataManagerTopic {
+public class PersistentDataManagerTopic
+        implements DataManagerTopic {
 
     @Autowired
     private TopicRepository topicRepository;
@@ -24,10 +25,15 @@ public class PersistentDataManagerTopic implements DataManagerTopic {
 
     // With @Transaction, if any Runtime Error is thrown then,
     // this db action will be rolled back (default functionality)
-    @Transactional(readOnly = true,     // will make sure the result is only for reading and not to update or delete
-            timeout = 10000)            // will wait for 10 sec for db fetch result or else throw error
+    @Transactional(readOnly = true,
+            // will make sure the result is only for
+            // reading and not to update or delete
+            timeout = 10000)
+    // will wait for 10 sec for db fetch result or else throw error
     public List<TopicBo> getAllTopics() {
-        return topicRepository.findAll().stream().map(e -> this.topicBoEntityMapper.toBo(e)).collect(Collectors.toList());
+        return topicRepository.findAll().stream()
+                .map(e -> this.topicBoEntityMapper.toBo(e))
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -41,8 +47,9 @@ public class PersistentDataManagerTopic implements DataManagerTopic {
     }
 
     @Transactional(readOnly = false,
-    propagation = Propagation.REQUIRES_NEW)    // As propagation is set to 'REQUIRES_NEW', So, this function will be executed
-                                               // in New db transaction
+    propagation = Propagation.REQUIRES_NEW)
+    // As propagation is set to 'REQUIRES_NEW', So,
+    // this function will be executed in New db transaction
     public void saveTopic(TopicBo topicBo) {
         topicRepository.save(this.topicBoEntityMapper.toEntity(topicBo));
     }
@@ -65,6 +72,7 @@ public class PersistentDataManagerTopic implements DataManagerTopic {
 
     @Transactional(readOnly = true)
     public TopicBo getByIdAndName(String id, String name) {
-        return this.topicBoEntityMapper.toBo(topicRepository.getByIdAndName(id, name));
+        return this.topicBoEntityMapper.toBo(
+                topicRepository.getByIdAndName(id, name));
     }
 }

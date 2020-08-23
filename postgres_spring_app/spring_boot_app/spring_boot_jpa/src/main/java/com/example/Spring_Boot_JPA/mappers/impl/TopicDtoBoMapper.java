@@ -6,7 +6,8 @@ import com.example.Spring_Boot_JPA.mappers.DtoBoMapperIface;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TopicDtoBoMapper implements DtoBoMapperIface<TopicBo, TopicDto> {
+public class TopicDtoBoMapper
+        implements DtoBoMapperIface<TopicBo, TopicDto> {
 
     @Override
     public TopicBo toBo(TopicDto topicDto) {

@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PersistentDataManagerBook implements DataManagerBook {
+public class PersistentDataManagerBook
+        implements DataManagerBook {
 
     @Autowired
     private BookRepository bookRepository;
@@ -20,11 +21,14 @@ public class PersistentDataManagerBook implements DataManagerBook {
     private BookBoEntityMapper bookBoEntityMapper;
 
     public List<BookBo> getAllBooks() {
-        return this.bookRepository.findAll().stream().map(e -> this.bookBoEntityMapper.toBo(e)).collect(Collectors.toList());
+        return this.bookRepository.findAll().stream()
+                .map(e -> this.bookBoEntityMapper.toBo(e))
+                .collect(Collectors.toList());
     }
 
     public BookBo getBook(String id) {
-        return this.bookBoEntityMapper.toBo(this.bookRepository.findOne(id));
+        return this.bookBoEntityMapper.toBo(
+                this.bookRepository.findOne(id));
     }
 
     public void addBook(BookBo bookBo) {
@@ -33,7 +37,8 @@ public class PersistentDataManagerBook implements DataManagerBook {
 
     public void updateBook(BookBo bookBo, String id) {
         this.bookRepository.delete(id);
-        this.bookRepository.save(this.bookBoEntityMapper.toEntity(bookBo));
+        this.bookRepository.save(
+                this.bookBoEntityMapper.toEntity(bookBo));
     }
 
     public void deleteBook(String id) {

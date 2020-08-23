@@ -14,7 +14,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TopicBo {  // Here, Bo => Business Object, which is used at business layer(in service classes).
+public class TopicBo {
+    // Here, Bo => Business Object, which is used
+    // at business layer(in service classes).
 
     @NotNull
     @JsonProperty(value = "topic_id")

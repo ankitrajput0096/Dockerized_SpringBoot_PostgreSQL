@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
+public class BooksAndTopicsSpringService
+        implements BooksAndTopicsSpringIface {
 
     @Autowired
     private DataManagerTopic dataManagerTopic;
@@ -38,7 +39,8 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
 
     public List<TopicDto> getAllTopicsDtos() {
         return this.getAllTopics().stream()
-                .map(e -> this.topicDtoBoMapper.toDto(e)).collect(Collectors.toList());
+                .map(e -> this.topicDtoBoMapper.toDto(e))
+                .collect(Collectors.toList());
     }
 
     public TopicBo getTopic(String id) {
@@ -91,7 +93,8 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
 
     public List<BookDto> getAllBookDtos() {
         return this.getAllBooks().stream()
-                .map(e -> this.bookDtoBoMapper.toDto(e)).collect(Collectors.toList());
+                .map(e -> this.bookDtoBoMapper.toDto(e))
+                .collect(Collectors.toList());
     }
 
     public BookBo getBook(String id) {
@@ -142,9 +145,13 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
         // So, both db statements one and two will be rolled back.
     }
 
-    @Transactional(timeout = 10000,   // This will make function wait only 10 seconds to fetch data from db,
-                                      // if it takes more than 10 seconds then it will throw error
-    rollbackFor = Exception.class)    // Can also use any other custom error class
+    @Transactional(timeout = 10000,
+            // This will make function wait only
+            // 10 seconds to fetch data from db,
+            // if it takes more than 10 seconds
+            // then it will throw error
+    rollbackFor = Exception.class)
+    // Can also use any other custom error class
     public void transactionTwo() throws Exception{
         // db statement one
         this.dataManagerTopic.addTopic(TopicBo.builder()
@@ -164,10 +171,15 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
         // So, both db statements one and two will be rolled back.
     }
 
-    @Transactional(timeout = 10000,   // This will make function wait only 10 seconds to fetch data from db,
-                                      // if it takes more than 10 seconds then it will throw error
-            rollbackFor = Exception.class,    // Can also use any other custom error class
-            noRollbackFor = ArithmeticException.class)    // If error thrown is 'ArithmeticException' then, we don't want to roll back db statements
+    @Transactional(timeout = 10000,
+            // This will make function wait only 10
+            // seconds to fetch data from db,
+            // if it takes more than 10 seconds then it will throw error
+            rollbackFor = Exception.class,
+            // Can also use any other custom error class
+            noRollbackFor = ArithmeticException.class)
+    // If error thrown is 'ArithmeticException'
+    // then, we don't want to roll back db statements
     public void transactionThree() throws Exception {
         // db statement one
         this.dataManagerTopic.addTopic(TopicBo.builder()
@@ -182,20 +194,31 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
                 .build());
 
         // Some more logic here, then throw 'Arithmetic' error
-        throw new ArithmeticException("this is an arithmetic exception, so no roll back for db");
-
+        throw new ArithmeticException("this is an arithmetic " +
+                "exception, so no roll back for db");
         // So, both db statements one and two will not be rolled back.
     }
 
-    @Transactional(timeout = 10000,   // This will make function wait only 10 seconds to fetch data from db,
-            // if it takes more than 10 seconds then it will throw error
-            rollbackFor = Exception.class,    // Can also use any other custom error class
-            noRollbackFor = ArithmeticException.class, // If error thrown is 'ArithmeticException' then, we don't want to roll back db statements
-            propagation = Propagation.REQUIRED)    // With This annotation, the transaction will happen in same single Transaction.
+    @Transactional(timeout = 10000,
+            // This will make function wait only
+            // 10 seconds to fetch data from db,
+            // if it takes more than 10 seconds
+            // then it will throw error
+            rollbackFor = Exception.class,
+            // Can also use any other custom error class
+            noRollbackFor = ArithmeticException.class,
+            // If error thrown is 'ArithmeticException'
+            // then, we don't want to roll back db statements
+            propagation = Propagation.REQUIRED)
+    // With This annotation, the transaction
+    // will happen in same single Transaction.
     public void transactionFour() throws Exception {
-        // db statement one - Audit entry which you want in db, even if there is exception raised in this function on later lines and roll back
-        // other db transaction but not this one.
-        this.dataManagerTopic.saveTopic(TopicBo.builder()  // This function will execute in different transaction, so will not be rolled back
+        // db statement one - Audit entry which you want in db,
+        // even if there is exception raised in this function on
+        // later lines and roll back other db transaction but not this one.
+        this.dataManagerTopic.saveTopic(TopicBo.builder()
+                // This function will execute in
+                // different transaction, so will not be rolled back
                 .id("topic_4")
                 .name("topic_4_name")
                 .description("topic_4_description")
@@ -207,9 +230,11 @@ public class BooksAndTopicsSpringService implements BooksAndTopicsSpringIface {
                 .build());
 
         // Some more logic here, then throw 'Exception' error
-        throw new Exception("this is an exception error, so db statement two will be rolled back from db");
+        throw new Exception("this is an exception error, so " +
+                "db statement two will be rolled back from db");
 
-        // So, db statement one will not be rolled back but db statement two will be rolled back.
+        // So, db statement one will not be rolled back but
+        // db statement two will be rolled back.
     }
 
 }

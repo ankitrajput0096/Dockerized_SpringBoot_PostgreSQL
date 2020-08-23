@@ -6,7 +6,8 @@ import com.example.Spring_Boot_JPA.mappers.BoEntityMapperIface;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookBoEntityMapper implements BoEntityMapperIface<BookBo, Book> {
+public class BookBoEntityMapper
+        implements BoEntityMapperIface<BookBo, Book> {
 
     @Override
     public BookBo toBo(Book book) {
