@@ -73,6 +73,17 @@ Keep docker running in a separate terminal tab, create another tab to run the ap
 
 Your server should be now running on http://localhost:8090
 
+## Alternate way to start this application
+1. Clone this repository
+2. Bring up the application by just using docker-compose 
+    ```
+    sudo docker-compose -f my-docker-compose.yml up
+    ```
+    Your server should be now running on http://localhost:8090
+3. Bring down the application 
+    ```
+    sudo docker-compose -f my-docker-compose.yml down
+    ```
 ## Get an access to all exposed API's with Postman
 
 1. Install Postman (https://www.getpostman.com)

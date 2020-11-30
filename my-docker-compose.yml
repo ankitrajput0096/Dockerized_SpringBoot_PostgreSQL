@@ -1,0 +1,17 @@
+version: "3"
+services:
+  db:
+    image: postgres:10.3
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: ankit
+      POSTGRES_USER: ankit
+  backend:
+    image: ankitrajput/springboot_app_with_db:1.0
+    restart: always
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
