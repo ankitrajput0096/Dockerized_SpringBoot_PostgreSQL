@@ -1,17 +1,12 @@
 package com.example.Spring_Boot_JPA.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -23,22 +18,34 @@ import java.util.Date;
 // table to store 'book' objects in db.
 @Setter
 @Getter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
 
     @Id
-    @NotNull
-    @Column(name = "book_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     // This will be the name of column to store
     // 'id' member field of book object in db table
-    private String id;
+    private Integer id;
+
+    @NotNull
+    @Column(name = "book_id", nullable = false, unique = true)
+    // This will be the name of column to store
+    // 'id' member field of book object in db table
+    // and 'unique=true' field makes this column always have unique values
+    private String bookId;
 
     @Column(name = "book_name")
     // This will be the name of column to store
     // 'name' member field of book object in db table
     private String name;
+
+    // storing java object as string in db
+    @Column(name = "book_metadata", columnDefinition = "text")
+    private String bookMetadata;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp

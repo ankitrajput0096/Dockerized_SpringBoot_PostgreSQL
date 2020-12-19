@@ -8,11 +8,11 @@ public interface DataManagerBook {
 
     List<BookBo> getAllBooks();
 
-    BookBo getBook(String id);
+    BookBo getBook(final String id);
 
-    void addBook(BookBo bookBo);
+    void addBook(final BookBo bookBo);
 
-    void updateBook(BookBo bookBo, String id);
+    void updateBook(final BookBo bookBo, final String id);
 
-    void deleteBook(String id);
+    void deleteBook(final String id);
 }

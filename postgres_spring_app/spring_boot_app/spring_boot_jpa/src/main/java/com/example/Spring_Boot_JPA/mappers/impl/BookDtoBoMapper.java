@@ -12,16 +12,16 @@ public class BookDtoBoMapper
     @Override
     public BookBo toBo(BookDto bookDto) {
         return BookBo.builder()
-                .id(bookDto.getId())
-                .name(bookDto.getName())
+                .bookId(bookDto.getId())
+                .bookName(bookDto.getName())
                 .build();
     }
 
     @Override
     public BookDto toDto(BookBo bookBo) {
         return BookDto.builder()
-                .id(bookBo.getId())
-                .name(bookBo.getName())
+                .id(bookBo.getBookId())
+                .name(bookBo.getBookName())
                 .build();
     }
 }

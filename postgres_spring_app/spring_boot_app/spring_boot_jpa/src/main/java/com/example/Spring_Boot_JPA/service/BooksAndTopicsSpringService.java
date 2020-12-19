@@ -1,6 +1,7 @@
 package com.example.Spring_Boot_JPA.service;
 
 import com.example.Spring_Boot_JPA.bo.BookBo;
+import com.example.Spring_Boot_JPA.bo.BookMetadata;
 import com.example.Spring_Boot_JPA.bo.TopicBo;
 import com.example.Spring_Boot_JPA.dto.BookDto;
 import com.example.Spring_Boot_JPA.dto.TopicDto;
@@ -106,6 +107,11 @@ public class BooksAndTopicsSpringService
     }
 
     public void addBook(BookBo bookBo) {
+        // setting metadata for the bookBo
+        bookBo.setBookMetadata(BookMetadata.builder()
+                .bookId(bookBo.getBookId())
+                .bookName(bookBo.getBookName())
+                .build());
         this.dataManagerBook.addBook(bookBo);
     }
 
@@ -114,6 +120,10 @@ public class BooksAndTopicsSpringService
     }
 
     public void updateBook(BookBo bookBo, String id) {
+        bookBo.setBookMetadata(BookMetadata.builder()
+                .bookId(bookBo.getBookId())
+                .bookName(bookBo.getBookName())
+                .build());
         this.dataManagerBook.updateBook(bookBo, id);
     }
 
@@ -135,8 +145,8 @@ public class BooksAndTopicsSpringService
                 .build());
         // db statement two
         this.dataManagerBook.addBook(BookBo.builder()
-                .id("book_1_id")
-                .name("book_1_name")
+                .bookId("book_1_id")
+                .bookName("book_1_name")
                 .build());
 
         // Some more logic here, then throw runtime error
@@ -161,8 +171,8 @@ public class BooksAndTopicsSpringService
                 .build());
         // db statement two
         this.dataManagerBook.addBook(BookBo.builder()
-                .id("book_2_id")
-                .name("book_2_name")
+                .bookId("book_2_id")
+                .bookName("book_2_name")
                 .build());
 
         // Some more logic here, then throw 'Exception' error
@@ -189,8 +199,8 @@ public class BooksAndTopicsSpringService
                 .build());
         // db statement two
         this.dataManagerBook.addBook(BookBo.builder()
-                .id("book_3_id")
-                .name("book_3_name")
+                .bookId("book_3_id")
+                .bookName("book_3_name")
                 .build());
 
         // Some more logic here, then throw 'Arithmetic' error
@@ -225,8 +235,8 @@ public class BooksAndTopicsSpringService
                 .build());
         // db statement two
         this.dataManagerBook.addBook(BookBo.builder()
-                .id("book_4_id")
-                .name("book_4_name")
+                .bookId("book_4_id")
+                .bookName("book_4_name")
                 .build());
 
         // Some more logic here, then throw 'Exception' error
