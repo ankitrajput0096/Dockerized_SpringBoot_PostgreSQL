@@ -1,9 +1,11 @@
 package com.example.Spring_Boot_JPA.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.example.Spring_Boot_JPA.bo.TopicBo;
+import com.example.Spring_Boot_JPA.entity.Topic;
 import com.example.Spring_Boot_JPA.mappers.impl.TopicBoEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,10 @@ public class PersistentDataManagerTopic
 
     @Transactional(readOnly = true)
     public TopicBo getTopic(String id) {
-        return this.topicBoEntityMapper.toBo(topicRepository.findOne(id));
+        Optional<Topic> topicEntity = topicRepository.findById(id);
+        if(topicEntity.isPresent())
+            return this.topicBoEntityMapper.toBo(topicEntity.get());
+        return null;
     }
 
     @Transactional(readOnly = false)
@@ -56,13 +61,13 @@ public class PersistentDataManagerTopic
 
     @Transactional(readOnly = false)
     public void updateTopic(TopicBo topicBo, String id) {
-        topicRepository.delete(id);
+        topicRepository.deleteById(id);
         topicRepository.save(this.topicBoEntityMapper.toEntity(topicBo));
     }
 
     @Transactional(readOnly = false)
     public void deleteTopic(String id) {
-        topicRepository.delete(id);
+        topicRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)
