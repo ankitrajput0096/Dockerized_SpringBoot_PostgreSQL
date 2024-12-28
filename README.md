@@ -1,6 +1,6 @@
 # Dockerized Spring boot application with PostgreSQL
 
-Dockerized Spring Boot application with Dockerized postgreSQL server (JPA, Hibernate, PostgreSQL)
+This project demonstrates a fully Dockerized environment for a Spring Boot application integrated with a PostgreSQL database. The application leverages JPA and Hibernate for seamless data persistence, providing a robust and scalable backend solution. Docker Compose is used to orchestrate the containers, ensuring easy setup and deployment.
 
 ## Getting Started
 
